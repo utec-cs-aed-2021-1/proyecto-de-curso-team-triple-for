@@ -32,25 +32,29 @@ struct Vertex {
 
 template<typename TV, typename TE>
 class Graph{
-private:    
-    std::unordered_map<string, Vertex<TV, TE>*>  vertexes;
-    
 public:
-    bool insertVertex(string id, TV vertex) = 0;   
-    bool createEdge(string id1, string id2, TE w) = 0;     
-    bool deleteVertex(string id) = 0;     
-    bool deleteEdge(string id) = 0;   
-    TE &operator()(string start, string end)= 0;  
-    float density() = 0;
-    bool isDense(float threshold = 0.5) = 0;
-    bool isConnected()= 0;
-    bool isStronglyConnected() throw();
-    bool empty();
-    void clear()= 0;  
-      
-    void displayVertex(string id)= 0;
-    bool findById(string id) = 0;
-    void display() = 0;
+    int count_edge = 0;
+    int count_vertex = 0;
+    std::unordered_map<string, Vertex<TV, TE>*>  vertexes;
+    virtual bool insertVertex(string id, TV vertex);
+    virtual bool createEdge(string id1, string id2, TE w);
+    virtual bool deleteVertex(string id);
+    virtual bool deleteEdge(string start, string end);
+    virtual TE &operator()(string start, string end);
+    virtual float density();
+    virtual bool isDense(float threshold = 0.5);
+    virtual bool isConnected();
+    virtual bool isStronglyConnected() throw();
+    bool empty(){
+        return vertexes.empty();
+    }
+    void clear() {
+        vertexes.clear();
+    }
+
+    virtual void displayVertex(string id);
+    virtual bool findById(string id);
+    virtual void display();
 };
 
 #endif

@@ -3,9 +3,9 @@
 --------
 
 ## Integrantes
-- 
-- 
-- 
+- Jorge Collazos
+- Luis Berrospi
+- Mario Ríos
 
 ----
 
