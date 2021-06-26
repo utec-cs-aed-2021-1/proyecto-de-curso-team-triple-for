@@ -83,11 +83,11 @@ public:
     }
 
     float density() override{
-        return this->count_edge / (this->count_vertex * (this->count_vertex - 1));
+        return (float)(2*(this->count_edge))/(this->count_vertex * (this->count_vertex - 1));
     }
 
     bool isDense(float threshold = 0.5) override{
-        if((this->count_edge) / (this->count_vertex * (this->count_vertex - 1)) < threshold) return true;
+        if((float)(2*(this->count_edge))/(this->count_vertex * (this->count_vertex - 1))< threshold) return true;
         return false;
     }
 
@@ -115,13 +115,6 @@ public:
             }
             std::cout << std::endl;
         }
-        /*for(auto map : this->vertexes) {
-            cout << "Id: " << map.first << " value: " << this->vertexes.at(map.first) << endl;
-            cout << "Connections :" <<endl;
-            for (auto const& i : map.second->edges) {
-                cout << i->vertexes[0].data << " - " << i->vertexes[1].data << " w: " << i.data <<endl;
-            }
-        }*/
     }
 };
 

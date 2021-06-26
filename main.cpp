@@ -43,9 +43,6 @@ int main(int argc, char *argv[]) {
     std::cout << "MENU DIRECT GRAPH TESTER" << std::endl;
     std::cout << "================================================" << std::endl;
 
-    //Tester::executeExamples();
-    //Tester::executeParser();
-
     auto* d = new DirectedGraph<int, int>();
     d->insertVertex("a", 1);
     d->insertVertex("b", 2);
@@ -61,6 +58,8 @@ int main(int argc, char *argv[]) {
     d->deleteEdge("b", "a");
     std::cout << std::endl;
     std::cout << std::endl;
+    cout<< d->density() <<endl;
+    cout<< d->isDense() <<endl;
 
     d->display();
     return EXIT_SUCCESS;
