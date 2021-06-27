@@ -4,7 +4,7 @@
 //#include "Parser/parser.h"
 #include "Graph/DirectedGraph.h"
 #include "Graph/UndirectedGraph.h"
-
+#include "Algorithms/prim.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -15,16 +15,24 @@ int main(int argc, char *argv[]) {
 
   // Tester::executeExamples();
   // Tester::executeParser();
+    UnDirectedGraph<char, int> g;
+   //auto *g = new UnDirectedGraph<char, int>();
+   g.insertVertex("a", 'A');
+   g.insertVertex("b", 'B');
+   g.insertVertex("c", 'C');
+   g.insertVertex("d", 'D');
 
-  // auto *g = new UnDirectedGraph<int, int>();
-  // g->insertVertex("a", 1);
-  // g->insertVertex("b", 2);
-  // g->insertVertex("c", 3);
-  // g->insertVertex("d", 4);
-  //
-  // g->createEdge("a", "b", 2);
-  // g->createEdge("a", "d", 5);
-  //
+    g.createEdge("a", "b", 2);
+    g.createEdge("c", "b", 2);
+    g.createEdge("a", "d", 5);
+    g.createEdge("a", "c", 10);
+
+    Prim<char, int> prim(&g, "a");
+    //g.createEdge("a", "c", 5);
+    UnDirectedGraph<char, int> result = prim.apply();
+
+    result.display();
+    //
   // g->display();
   //
   // g->deleteVertex("a");
@@ -38,7 +46,7 @@ int main(int argc, char *argv[]) {
   // std::cout << std::endl;
   // std::cout << std::endl;
   // std::cout << std::endl;
-
+  /*
   std::cout << "================================================" << std::endl;
   std::cout << "MENU DIRECT GRAPH TESTER" << std::endl;
   std::cout << "================================================" << std::endl;
@@ -60,6 +68,6 @@ int main(int argc, char *argv[]) {
   cout << d->density() << endl;
   cout << d->isDense() << endl;
 
-  d->display();
+  d->display();*/
   return EXIT_SUCCESS;
 }
