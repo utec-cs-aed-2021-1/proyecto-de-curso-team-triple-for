@@ -1,5 +1,22 @@
 #include "Graph/UndirectedGraph.h"
 #include <climits>
+
+/*  TEST
+    UnDirectedGraph<char, int> g;
+
+    g.insertVertex("a", 'A');
+    g.insertVertex("b", 'B');
+    g.insertVertex("c", 'C');
+    g.insertVertex("d", 'D');
+
+    g.createEdge("a", "b", 2);
+    g.createEdge("c", "b", 2);
+    g.createEdge("a", "d", 5);
+    g.createEdge("a", "c", 10);
+
+    Prim<char, int> prim(&g, "a");
+    UnDirectedGraph<char, int> result = prim.apply();
+ */
 template<typename TV, typename TE>
 class Prim{
 public:

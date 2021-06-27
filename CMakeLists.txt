@@ -24,4 +24,6 @@ add_executable(proyecto_de_curso_team_triple_for
         Parser/Data/desktop.ini
         Parser/Data/pe.json
         Parser/desktop.ini
+        Dset/ds.h
+        Dset/dsarray.h
         main.cpp)

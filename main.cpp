@@ -5,6 +5,7 @@
 #include "Graph/DirectedGraph.h"
 #include "Graph/UndirectedGraph.h"
 #include "Algorithms/prim.h"
+#include "Algorithms/kruskal.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -22,14 +23,20 @@ int main(int argc, char *argv[]) {
    g.insertVertex("c", 'C');
    g.insertVertex("d", 'D');
 
+   g.insertVertex("e", 'E');
+   g.insertVertex("f", 'F');
+
     g.createEdge("a", "b", 2);
+    g.createEdge("c", "d", 1);
     g.createEdge("c", "b", 2);
     g.createEdge("a", "d", 5);
     g.createEdge("a", "c", 10);
+    /* test unconected graph */
+    g.createEdge("e", "f", 4);
 
-    Prim<char, int> prim(&g, "a");
+    Kruskal<char, int> kruskal(&g);
     //g.createEdge("a", "c", 5);
-    UnDirectedGraph<char, int> result = prim.apply();
+    UnDirectedGraph<char, int> result = kruskal.apply();
 
     result.display();
     //
