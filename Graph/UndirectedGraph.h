@@ -3,6 +3,7 @@
 
 #include "graph.h"
 #include <iostream>
+#include "dfs.h"
 
 template <typename TV, typename TE>
 class UnDirectedGraph : public Graph<TV, TE> {
@@ -100,7 +101,14 @@ public:
     return false;
   }
 
-  bool isConnected() {}
+  bool isConnected() {
+      Dfs<TV,TE> test(this,this->vertexes.begin()->first);
+      auto vector = test.apply();
+      if (vector.size() == this->count_vertex){
+          return true;
+      }
+      return false;
+  }
 
   bool isStronglyConnected() throw() {}
 

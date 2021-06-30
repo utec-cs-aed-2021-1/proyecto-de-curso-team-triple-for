@@ -6,6 +6,8 @@
 #include "Graph/UndirectedGraph.h"
 #include "Algorithms/prim.h"
 #include "Algorithms/kruskal.h"
+#include "Algorithms/dfs.h"
+#include "Algorithms/bfs.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -33,12 +35,24 @@ int main(int argc, char *argv[]) {
     g.createEdge("a", "c", 10);
     /* test unconected graph */
     g.createEdge("e", "f", 4);
+    g.createEdge("a","e",29);
 
-    Kruskal<char, int> kruskal(&g);
+
+    
+
+    // Kruskal<char, int> kruskal(&g);
     //g.createEdge("a", "c", 5);
-    UnDirectedGraph<char, int> result = kruskal.apply();
+    // UnDirectedGraph<char, int> result = kruskal.apply();
 
-    result.display();
+    // result.display();
+
+    Bfs<char,int> test(&g,"a");
+    auto xd = test.apply();
+
+    cout << xd.size();
+
+    //
+    
     //
   // g->display();
   //

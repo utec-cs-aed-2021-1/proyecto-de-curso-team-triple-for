@@ -1,7 +1,7 @@
-#ifndef NONDIRECTEDGRAPH_H
-#define NONDIRECTEDGRAPH_H
-
+#include "dfs.h"
 #include "graph.h"
+#ifndef NONDIRECTEDGRAPH_H
+#define NONDIRECTEDGRAPH_H #include "dfs.h" #include "graph.h"
 #include <iostream>
 
 template <typename TV, typename TE> class DirectedGraph : public Graph<TV, TE> {
@@ -35,7 +35,7 @@ public:
       return false;
     }
   }
-  bool deleteVertex(string id) override { 
+  bool deleteVertex(string id) override {
     if (this->vertexes.find(id) == this->vertexes.end()) {
       return false;
     } else {
@@ -95,9 +95,20 @@ public:
     return false;
   }
 
-  bool isConnected() {}
+  bool isConnected() {
+    for (auto it = this->vertexes.begin(); it != this->vertexes.end(); ++it) {
+      Dfs<TV, TE> test(this, it->first);
+      auto vector = test.apply();
+      if (vector.size() == this->count_vertex) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-  bool isStronglyConnected() throw() {}
+  bool isStronglyConnected() throw() {
+
+  }
 
   void displayVertex(string id) override {
     cout << id << "-" << this->vertexes.at(id)->data << endl;
