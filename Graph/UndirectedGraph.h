@@ -39,7 +39,7 @@ public:
     }
   }
 
-  bool deleteVertex(string id) override { ////////faltaaaa
+  bool deleteVertex(string id) override {
     if (this->vertexes.find(id) == this->vertexes.end()) {
       return false;
     } else {
@@ -86,7 +86,18 @@ public:
     return true;
   }
 
-  TE &operator()(string start, string end) {}
+  TE &operator()(string start, string end) {
+      if (this->vertexes.find(start) == this->vertexes.end() &&
+          this->vertexes.find(start) == this->vertexes.end()) {
+          throw("There is no edge with these keys");
+      }
+      for (auto edge : this->vertexes[start]->edges) {
+          if (edge->vertexes[0] == this->vertexes[start] &&
+              edge->vertexes[1] == this->vertexes[end]) {
+              return edge->weight;
+          }
+      }
+  }
 
   float density() override {
     return (float)(2 * (this->count_edge)) /
@@ -110,7 +121,7 @@ public:
       return false;
   }
 
-  bool isStronglyConnected() throw() {}
+  bool isStronglyConnected() throw(){}
 
   void displayVertex(string id) override {
     cout << id << "-" << this->vertexes.at(id)->data << endl;
