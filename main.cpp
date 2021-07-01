@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 
   // Tester::executeExamples();
   // Tester::executeParser();
-    UnDirectedGraph<char, int> g;
+    DirectedGraph<char, int> g;
    //auto *g = new UnDirectedGraph<char, int>();
    g.insertVertex("a", 'A');
    g.insertVertex("b", 'B');
@@ -47,10 +47,9 @@ int main(int argc, char *argv[]) {
     // result.display();
 
     Bfs<char,int> test(&g,"a");
-    auto xd = test.apply();
+    auto vectortest = test.apply();
 
-    cout << xd.size();
-
+    cout << vectortest.size() << endl;
     //
     
     //

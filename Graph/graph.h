@@ -45,6 +45,16 @@ public:
   virtual void displayVertex(string id) = 0;
   virtual bool findById(string id) = 0;
   virtual void display() = 0;
+
+  Vertex<TV, TE> *findVertex(string id) { return this->vertexes[id]; }
+  Edge<TV, TE> *findEdge(string start, string end) {
+    for (auto it = this->vertexes[start]->edges.begin();
+         it != this->vertexes[start]->edges.end(); ++it) {
+      if ((*it)->vertexes[1] == this->vertexes[end]) {
+        return *it;
+      }
+    }
+  };
 };
 
 #endif

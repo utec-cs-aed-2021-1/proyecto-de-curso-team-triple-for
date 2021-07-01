@@ -95,6 +95,7 @@ public:
     return false;
   }
 
+  // weakly connected
   bool isConnected() {
     for (auto it = this->vertexes.begin(); it != this->vertexes.end(); ++it) {
       Dfs<TV, TE> test(this, it->first);
@@ -106,8 +107,16 @@ public:
     return false;
   }
 
+  // strongly connected
   bool isStronglyConnected() throw() {
-
+    for (auto it = this->vertexes.begin(); it != this->vertexes.end(); ++it) {
+      Dfs<TV, TE> test(this, it->first);
+      auto vector = test.apply();
+      if (vector.size() != this->count_vertex) {
+          return false;
+      }
+    }
+    return true;
   }
 
   void displayVertex(string id) override {
