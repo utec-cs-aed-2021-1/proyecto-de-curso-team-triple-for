@@ -34,7 +34,7 @@ public:
     while (!queue.empty()) {
       Vertex<TV, TE> *s = queue.front();
       result.push_back(s);
-      cout << s->data << endl;
+      //cout << s->data << endl;
       queue.pop_front();
 
       for (auto it = s->edges.begin(); it != s->edges.end(); ++it) {

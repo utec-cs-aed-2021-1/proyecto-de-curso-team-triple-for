@@ -29,7 +29,7 @@ public:
 
     UnDirectedGraph<TV, TE> apply(){
         //std::unordered_map<Vertex<TV, TE>*, Vertex<TV, TE>*>  parents;
-        char id = 'a'; /* max graph 255 nodes :c*/
+        string id = "a";
         auto* result = new  UnDirectedGraph<TV, TE>();
         std::unordered_map<Vertex<TV, TE>*, string> ids;
         std::unordered_map<Vertex<TV, TE>*, int> dist;
@@ -39,15 +39,16 @@ public:
             dist[vertex.second] = INT_MAX;
             parent[vertex.second] = nullptr;
             ids[vertex.second] = id;
-            id++;
+            id[id.size()-1]++;
+            if (id[id.size()-1] >= 254) {
+                id += "a";
+            }
         }
 
         Vertex<TV, TE>* vAdr = graph.vertexes[start_id];
         /* first is always 0 */
         dist[vAdr] = 0;
         /* add 0 to the solution */
-        //ids[vAdr] = id;
-        //id++;
         result->insertVertex(ids[vAdr], vAdr->data);
 
         while (!dist.empty()) {
@@ -78,15 +79,6 @@ public:
                     }
                 }
             }
-        }
-
-
-
-        for (auto &k : dist) {
-            cout << k.second << " ";
-        }
-        for (auto &k : parent) {
-            cout << k.second << " ";
         }
         return *result;
     }

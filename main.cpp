@@ -65,7 +65,9 @@ void directed(){
         cout << "\t8 Check if it is a empty graph" << std::endl;
         cout << "\t9 Clear a graph" << std::endl;
         cout << "\t10 Display" << std::endl;
-        cout << "\t11 Return to the previous menu" << std::endl;
+        cout << "\t11 Show dfs" << std::endl;
+        cout << "\t12 Show bfs" << std::endl;
+        cout << "\t13 Return to the previous menu" << std::endl;
         cout<<"Please select an option: ";cin>>op;
         switch (op) {
             case 1:{
@@ -172,12 +174,38 @@ void directed(){
                 cout<<endl;
                 break;
             }
-            case 11:
+            case 11:{
+                cout<<endl;
+                cout << "\tEnter the name of the starting vertex: ";cin>>key;
+                Dfs<string, int> dfs(&g, key);
+                vector<Vertex<string, int>*> result = dfs.apply();
+                cout<<"\t";
+                for (auto vertex: result) {
+                    cout << vertex->data << " ";
+                }
+                cout<<endl;
+                cout<<endl;
+                break;
+            }
+            case 12:{
+                cout<<endl;
+                cout << "\tEnter the name of the starting vertex: ";cin>>key;
+                Bfs<string, int> bfs(&g, key);
+                vector<Vertex<string, int>*> result = bfs.apply();
+                cout<<"\t";
+                for (auto vertex: result) {
+                    cout << vertex->data << " ";
+                }
+                cout<<endl;
+                cout<<endl;
+                break;
+            }
+            case 13:
                 return;
             default:
                 cout << "Entered an incorrect option"<<endl;
         }
-    } while (op != 11);
+    } while (op != 13);
 }
 void undirected(){
     int op = 0, w;
@@ -205,7 +233,11 @@ void undirected(){
         cout << "\t7 Check if it is a empty graph" << std::endl;
         cout << "\t8 Clear a graph" << std::endl;
         cout << "\t9 Display" << std::endl;
-        cout << "\t10 Return to the previous menu" << std::endl;
+        cout << "\t10 Show kruskal" << std::endl;
+        cout << "\t11 Show prim" << std::endl;
+        cout << "\t12 Show dfs" << std::endl;
+        cout << "\t13 Show bfs" << std::endl;
+        cout << "\t14 Return to the previous menu" << std::endl;
         cout<<"Please select an option: ";cin>>op;
         switch (op) {
             case 1:{
@@ -304,17 +336,61 @@ void undirected(){
                 cout<<endl;
                 break;
             }
-            case 10:
+            case 10:{
+                cout<<endl;
+                Kruskal<string, int> kruskal(&g);
+                UnDirectedGraph<string, int> result = kruskal.apply();
+                result.display();
+                cout<<endl;
+                break;
+            }
+            case 11:{
+                cout<<endl;
+                cout << "\tEnter the name of the starting vertex: ";cin>>key;
+                Prim<string, int> prim(&g, key);
+                UnDirectedGraph<string, int> result = prim.apply();
+                result.display();
+                cout<<endl;
+                break;
+            }
+            case 12:{
+                cout<<endl;
+                cout << "\tEnter the name of the starting vertex: ";cin>>key;
+                Dfs<string, int> dfs(&g, key);
+                vector<Vertex<string, int>*> result = dfs.apply();
+                cout<<"\t";
+                for (auto vertex: result) {
+                    cout << vertex->data << " ";
+                }
+                cout<<endl;
+                break;
+            }
+            case 13:{
+                cout<<endl;
+                cout << "\tEnter the name of the starting vertex: ";cin>>key;
+                Bfs<string, int> bfs(&g, key);
+                vector<Vertex<string, int>*> result = bfs.apply();
+                cout<<"\t";
+                for (auto vertex: result) {
+                    cout << vertex->data << " ";
+                }
+                cout<<endl;
+                cout<<endl;
+                break;
+            }
+            case 14:
                 return;
             default:
                 cout << "Entered an incorrect option"<<endl;
         }
-    } while (op != 10);
+    } while (op != 14);
 }
 void test(){
     std::cout << "================================================" << std::endl;
     std::cout << "MENU UNDIRECT GRAPH TESTER" << std::endl;
     std::cout << "================================================" << std::endl;
+
+    //Here you can run your own code with exit option in the menu
 
     // Tester::executeExamples();
     // Tester::executeParser();

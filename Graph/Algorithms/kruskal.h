@@ -37,11 +37,11 @@ public:
   UnDirectedGraph<TV, TE> graph;
   Kruskal(UnDirectedGraph<TV, TE> *graph) { this->graph = *graph; }
   UnDirectedGraph<TV, TE> apply() {
-    if (!this->graph->isConnected()) {
+    if (!this->graph.isConnected()) {
       throw("Kruskal can not be applied");
     }
     auto *result = new UnDirectedGraph<TV, TE>();
-    char id = 'a';
+    string id = "a";
     std::unordered_map<Vertex<TV, TE> *, string> ids;
 
     vector<Edge<TV, TE> *> edges;
@@ -49,7 +49,10 @@ public:
     for (auto &vertex : graph.vertexes) {
       vecVertexes.push_back(vertex.second);
       ids[vertex.second] = id;
-      id++;
+      id[id.size()-1]++;
+      if (id[id.size()-1] >= 254) {
+          id += "a";
+      }
       for (auto &edge : vertex.second->edges) {
         bool found = false;
         for (int i = 0; i < edges.size(); ++i) {
