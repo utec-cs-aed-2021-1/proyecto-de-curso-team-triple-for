@@ -5,9 +5,12 @@
 #include "Graph/DirectedGraph.h"
 #include "Graph/UndirectedGraph.h"
 #include "Algorithms/prim.h"
+#include "Algorithms/dijkstra.h"
 #include "Algorithms/kruskal.h"
 #include "Algorithms/dfs.h"
 #include "Algorithms/bfs.h"
+#include "iomanip"
+
 using namespace std;
 
 void directed();
@@ -400,7 +403,6 @@ void test(){
     g.insertVertex("b", 'B');
     g.insertVertex("c", 'C');
     g.insertVertex("d", 'D');
-
     g.insertVertex("e", 'E');
     g.insertVertex("f", 'F');
 
@@ -409,93 +411,45 @@ void test(){
     g.createEdge("c", "b", 2);
     g.createEdge("a", "d", 5);
     g.createEdge("a", "c", 10);
-    /* test unconected graph */
     g.createEdge("e", "f", 4);
     g.createEdge("a","e",29);
 
-    DirectedGraph<char, int> g2;
-    //auto *g = new UnDirectedGraph<char, int>();
-    g2.insertVertex("a", 'A');
-    g2.insertVertex("b", 'B');
-    g2.insertVertex("c", 'C');
-    g2.insertVertex("d", 'D');
-    g2.createEdge("a", "b", 2);
-    g2.createEdge("b", "c", 1);
-    g2.createEdge("c", "d", 2);
-    if(g2.isStronglyConnected()) cout<<"true"<<endl;
-    else cout<<"false"<<endl;
+    Dijkstra<char, int> dijkstra(&g, "a");
 
-    DirectedGraph<char, int> g3;
-    //auto *g = new UnDirectedGraph<char, int>();
-    g3.insertVertex("a", 'A');
-    g3.insertVertex("b", 'B');
-    g3.insertVertex("c", 'C');
-    g3.insertVertex("d", 'D');
-    g3.insertVertex("e", 'E');
-    g3.createEdge("a", "b", 2);
-    g3.createEdge("b", "c", 1);
-    g3.createEdge("c", "d", 2);
-    g3.createEdge("d", "a", 2);
-    g3.createEdge("c", "e", 2);
-    g3.createEdge("e", "c", 2);
-    if(g3.isStronglyConnected()) cout<<"true"<<endl;
-    else cout<<"false"<<endl;
+    vector<tuple<string, int, string>> result = dijkstra.apply();
+    cout << setw(5)<< "ver" << setw(5) << "dist" << setw(5) << "par" << endl;
+    for (auto& row: result) {
+        cout << setw(5) << get<0>(row) << setw(5) << get<1>(row) << setw(5) << get<2>(row) << endl;
+    }
 
-    auto val = g3("e","c");
-    cout<<val<<endl;
-    // Kruskal<char, int> kruskal(&g);
-    //g.createEdge("a", "c", 5);
-    // UnDirectedGraph<char, int> result = kruskal.apply();
+    DirectedGraph<char, int> dg;
+    dg.insertVertex("a", 'A');
+    dg.insertVertex("b", 'B');
+    dg.insertVertex("c", 'C');
+    dg.insertVertex("d", 'D');
+    dg.insertVertex("e", 'E');
+    dg.insertVertex("f", 'F');
 
-    // result.display();
+    dg.createEdge("a", "b", 2);
+    dg.createEdge("c", "d", 1);
+    dg.createEdge("c", "b", 2);
+    dg.createEdge("a", "d", 5);
+    dg.createEdge("a", "c", 10);
+    dg.createEdge("e", "f", 4);
+    dg.createEdge("a","e",29);
 
-    Bfs<char,int> test(&g,"a");
-    auto vectortest = test.apply();
+    Dijkstra<char, int> dijkstra_dg(&dg, "a");
 
-    cout << vectortest.size() << endl;
-    //
+    vector<tuple<string, int, string>> result_dg = dijkstra_dg.apply();
+    cout << setw(5)<< "ver" << setw(5) << "dist" << setw(5) << "par" << endl;
+    for (auto& row: result_dg) {
+        cout << setw(5)<< get<0>(row) << setw(5) << get<1>(row) << setw(5) << get<2>(row) << endl;
+    }
 
-    //
-    // g->display();
-    //
-    // g->deleteVertex("a");
-    // // g->deleteEdge("a", "b");
-    //
-    // std::cout << std::endl;
-    // std::cout << std::endl;
-    //
-    // g->display();
-    //
-    // std::cout << std::endl;
-    // std::cout << std::endl;
-    // std::cout << std::endl;
-    /*
-    std::cout << "================================================" << std::endl;
-    std::cout << "MENU DIRECT GRAPH TESTER" << std::endl;
-    std::cout << "================================================" << std::endl;
-
-    auto *d = new DirectedGraph<int, int>();
-    d->insertVertex("a", 1);
-    d->insertVertex("b", 2);
-    d->insertVertex("c", 3);
-
-    d->createEdge("a", "b", 2);
-    d->createEdge("b", "a", 6);
-
-    d->display();
-
-    d->deleteVertex("a");
-    d->deleteEdge("b", "a");
-    std::cout << std::endl;
-    std::cout << std::endl;
-    cout << d->density() << endl;
-    cout << d->isDense() << endl;
-
-    d->display();*/
 }
 
 int main(int argc, char *argv[]) {
-  menu();
+  //menu();
   test();
   return EXIT_SUCCESS;
 }
