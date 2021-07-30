@@ -23181,52 +23181,6 @@
         ]
     },
     {
-        "City": "Praia",
-        "DBTZ": "-1",
-        "Name": "Praia International Airport",
-        "Country": " Santiago Island",
-        "IATA/FAA": "Cape Verde",
-        "Longitude": "14.9245",
-        "ICAO": "RAI",
-        "Airport ID": "5674",
-        "Latitude": "GVNP",
-        "Timezone": "-23.4935",
-        "DST": "230",
-        "destinations": [
-            "1050",
-            "1074",
-            "5665",
-            "1084",
-            "973",
-            "1054",
-            "1638",
-            "3448",
-            "1103",
-            "1382",
-            "2559",
-            "1104",
-            "5675",
-            "1102",
-            "1106"
-        ]
-    },
-    {
-        "City": "Sao Filipe",
-        "DBTZ": "-1",
-        "Name": "Sao Filipe Airport",
-        "Country": " Fogo Island",
-        "IATA/FAA": "Cape Verde",
-        "Longitude": "14.885",
-        "ICAO": "SFL",
-        "Airport ID": "5675",
-        "Latitude": "GVSF",
-        "Timezone": "-24.48",
-        "DST": "617",
-        "destinations": [
-            "5674"
-        ]
-    },
-    {
         "City": "Joplin",
         "DBTZ": "A",
         "Name": "Joplin Rgnl",
@@ -60979,29 +60933,6 @@
             "529",
             "5566",
             "5571"
-        ]
-    },
-    {
-        "City": "Doncaster",
-        "DBTZ": "0",
-        "Name": "Robin Hood Doncaster Sheffield Airport",
-        "Country": " Sheffield",
-        "IATA/FAA": "United Kingdom",
-        "Longitude": "53.474722",
-        "ICAO": "DSA",
-        "Airport ID": "5562",
-        "Latitude": "EGCN",
-        "Timezone": "-1.004444",
-        "DST": "55",
-        "destinations": [
-            "499",
-            "3998",
-            "668",
-            "671",
-            "674",
-            "3959",
-            "679",
-            "680"
         ]
     },
     {

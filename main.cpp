@@ -1,4 +1,8 @@
+#include <filesystem>
+#include <ios>
 #include <iostream>
+#include <utility>
+#include <vector>
 
 //#include "Tester/tester.h"
 //#include "Parser/parser.h"
@@ -487,8 +491,12 @@ void test() {
 }
 
 int main(int argc, char *argv[]) {
+  filesystem::current_path("../Parser/Data");
   // menu();
   // test();
-  getJsonFromFile("pe.json");
+  auto jsonResult = getJsonFromFile("pe.json");
+  // auto heuristic = getHeuristic("2792",jsonResult);
+  auto graph = getGraph(jsonResult);
+  graph.display();
   return EXIT_SUCCESS;
 }
