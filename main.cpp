@@ -496,7 +496,9 @@ int main(int argc, char *argv[]) {
   // test();
   auto jsonResult = getJsonFromFile("pe.json");
   // auto heuristic = getHeuristic("2792",jsonResult);
-  auto graph = getGraph(jsonResult);
-  graph.display();
+  // auto graph = getGraph(jsonResult);
+  // graph.display();
+  auto x = getairportfromid("2802",jsonResult);
+  x.display();
   return EXIT_SUCCESS;
 }

@@ -7,6 +7,7 @@
 #include <string>
 #include <unordered_map>
 #include "UndirectedGraph.h"
+#include "airport.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -19,3 +20,5 @@ json getJsonFromFile(string fileName);
 unordered_map<string, double> getHeuristic(string airportId, json target);
 
 UnDirectedGraph<string, double> getGraph(json target);
+
+Airport getairportfromid(string id, json target);

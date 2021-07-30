@@ -88,3 +88,28 @@ UnDirectedGraph<string, double> getGraph(json target) {
   }
   return result;
 }
+
+Airport getairportfromid(string id, json target){
+  Airport result;
+  for (auto &airport : target) {
+    string objectId = airport["Airport ID"].get<string>();
+    if (objectId == id) {
+      result.airport_ID = id;
+      result.city = airport["City"].get<string>();
+      result.DBTZ = airport["DBTZ"].get<string>();
+      result.name = airport["Name"].get<string>();
+      result.country = airport["Country"].get<string>();
+      result.IATA_FAA = airport["IATA/FAA"].get<string>();
+      result.longitude = stod(airport["Longitude"].get<string>());
+      result.ICAO = airport["ICAO"].get<string>();
+      result.latitude = stod(airport["Latitude"].get<string>());
+      result.timezone = airport["Timezone"].get<string>();
+      result.DST = airport["DST"].get<string>();
+      vector<string> destinations =
+          airport["destinations"].get<vector<string>>();
+      result.destinations = destinations;
+      break;
+    }
+  }
+  return result;
+}
