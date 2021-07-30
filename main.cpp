@@ -496,9 +496,11 @@ int main(int argc, char *argv[]) {
   // test();
   auto jsonResult = getJsonFromFile("pe.json");
   // auto heuristic = getHeuristic("2792",jsonResult);
-  // auto graph = getGraph(jsonResult);
+  auto graph = getGraph(jsonResult);
+  cout << graph.count_edge << endl;
+  cout << graph.count_vertex << endl;
   // graph.display();
-  auto x = getairportfromid("2802",jsonResult);
-  x.display();
+  // auto x = getairportfromid("2802",jsonResult);
+  // x.display();
   return EXIT_SUCCESS;
 }
