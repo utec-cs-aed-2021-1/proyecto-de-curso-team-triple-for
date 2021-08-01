@@ -11,6 +11,7 @@
 #include "Algorithms/dijkstra.h"
 #include "Algorithms/kruskal.h"
 #include "Algorithms/prim.h"
+#include "Algorithms/FloydWarshall.h"
 #include "Graph/DirectedGraph.h"
 #include "Graph/UndirectedGraph.h"
 #include "Parser/parser.h"
@@ -439,68 +440,42 @@ void test() {
   // Tester::executeExamples();
   // Tester::executeParser();
   // DirectedGraph<char, int> g;
-  UnDirectedGraph<char, int> g;
-  g.insertVertex("a", 'A');
-  g.insertVertex("b", 'B');
-  g.insertVertex("c", 'C');
-  g.insertVertex("d", 'D');
-  g.insertVertex("e", 'E');
-  g.insertVertex("f", 'F');
 
-  g.createEdge("a", "b", 2);
-  g.createEdge("c", "d", 1);
-  g.createEdge("c", "b", 2);
-  g.createEdge("a", "d", 5);
-  g.createEdge("a", "c", 10);
-  g.createEdge("e", "f", 4);
-  g.createEdge("a", "e", 29);
-
-  Dijkstra<char, int> dijkstra(&g, "a");
-
-  vector<tuple<string, int, string>> result = dijkstra.apply();
-  cout << setw(5) << "ver" << setw(5) << "dist" << setw(5) << "par" << endl;
-  for (auto &row : result) {
-    cout << setw(5) << get<0>(row) << setw(5) << get<1>(row) << setw(5)
-         << get<2>(row) << endl;
-  }
-
+    //floy - warshall 06 slide 20
   DirectedGraph<char, int> dg;
-  dg.insertVertex("a", 'A');
-  dg.insertVertex("b", 'B');
-  dg.insertVertex("c", 'C');
-  dg.insertVertex("d", 'D');
-  dg.insertVertex("e", 'E');
-  dg.insertVertex("f", 'F');
+    dg.insertVertex("1", '1');
+    dg.insertVertex("2", '2');
+    dg.insertVertex("3", '3');
+    dg.insertVertex("4", '4');
+    dg.insertVertex("5", '5');
 
-  dg.createEdge("a", "b", 2);
-  dg.createEdge("c", "d", 1);
-  dg.createEdge("c", "b", 2);
-  dg.createEdge("a", "d", 5);
-  dg.createEdge("a", "c", 10);
-  dg.createEdge("e", "f", 4);
-  dg.createEdge("a", "e", 29);
+  dg.createEdge("1", "3", 6);
+  dg.createEdge("1", "4", 3);
+  dg.createEdge("2", "1", 3);
+  dg.createEdge("3", "4", 2);
+  dg.createEdge("4", "3", 1);
+  dg.createEdge("4", "2", 1);
+  dg.createEdge("5", "2", 4);
+  dg.createEdge("5", "4", 2);
 
-  Dijkstra<char, int> dijkstra_dg(&dg, "a");
 
-  vector<tuple<string, int, string>> result_dg = dijkstra_dg.apply();
-  cout << setw(5) << "ver" << setw(5) << "dist" << setw(5) << "par" << endl;
-  for (auto &row : result_dg) {
-    cout << setw(5) << get<0>(row) << setw(5) << get<1>(row) << setw(5)
-         << get<2>(row) << endl;
-  }
+  FloydWarshall<char, int> floydWarhsall = FloydWarshall(&dg);
+
+  pair<vector<vector<int>>, vector<vector<string>>> result = floydWarhsall.apply();
+  floydWarhsall.display();
 }
 
 int main(int argc, char *argv[]) {
   filesystem::current_path("../Parser/Data");
   // menu();
-  // test();
-  auto jsonResult = getJsonFromFile("pe.json");
+   test();
+  /*auto jsonResult = getJsonFromFile("airports.json");
   // auto heuristic = getHeuristic("2792",jsonResult);
   auto graph = getGraph(jsonResult);
   cout << graph.count_edge << endl;
   cout << graph.count_vertex << endl;
   // graph.display();
   // auto x = getairportfromid("2802",jsonResult);
-  // x.display();
+  // x.display();*/
   return EXIT_SUCCESS;
 }
