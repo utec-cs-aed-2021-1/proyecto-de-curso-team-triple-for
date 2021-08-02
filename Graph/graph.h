@@ -61,6 +61,10 @@ public:
       }
     }
   };
+  Vertex<TV,TE>* findDifferent(Edge<TV,TE>* edge, Vertex<TV,TE>* current){
+      if (edge->vertexes[0]->data == current->data) return edge->vertexes[1];
+      return edge->vertexes[0];
+  }
   Edge<TV, TE> *findEdge(Vertex<TV, TE> *start, Vertex<TV, TE> *end) {
     for (auto it = start->edges.begin(); it != start->edges.end(); ++it) {
       if ((*it)->vertexes[1] == end) {

@@ -8,6 +8,7 @@
 //#include "Parser/parser.h"
 #include "Algorithms/FloydWarshall.h"
 #include "Algorithms/GreedyBfs.h"
+#include "Algorithms/astar.h"
 #include "Algorithms/bfs.h"
 #include "Algorithms/dfs.h"
 #include "Algorithms/dijkstra.h"
@@ -478,15 +479,40 @@ int main(int argc, char *argv[]) {
   //
   // menu();
   // test();
+  // auto jsonResult = getJsonFromFile("airports.json");
+  // auto graph = getGraph(jsonResult);
+  // GreedyBfs<string, double> greedyBfs = GreedyBfs(&graph);
+  // auto x = greedyBfs.apply("7252", "5502");
+  // for (auto m : x) {
+  //     auto x = getairportfromid(m,jsonResult);
+  //     x.display();
+  //     cout << endl;
+  // }
+  //
   auto jsonResult = getJsonFromFile("airports.json");
   auto graph = getGraph(jsonResult);
+  string origin = "341";
+  string destiny = "3199";
+  auto heuristic = getHeuristic(destiny, jsonResult);
+  AStar<string, double> astar = AStar(&graph, heuristic);
+  auto x = astar.apply(origin, destiny);
+  cout << x.size();
+
+  // for (auto m : x) {
+  //     auto x = getairportfromid(m,jsonResult);
+  //     x.display();
+  //     cout << endl;
+  // }
+  cout << endl << endl;
   GreedyBfs<string, double> greedyBfs = GreedyBfs(&graph);
-  auto x = greedyBfs.apply("7252", "5502");
-  for (auto m : x) {
-      auto x = getairportfromid(m,jsonResult);
-      x.display();
-      cout << endl;
-  }
+  auto z = greedyBfs.apply(origin, destiny);
+  cout << z.size();
+  // for (auto m : x) {
+  //     auto x = getairportfromid(m,jsonResult);
+  //     x.display();
+  //     cout << endl;
+  // }
+
   /*
   auto jsonResult = getJsonFromFile("airports.json");
   // auto heuristic = getHeuristic("2792",jsonResult);

@@ -49,17 +49,19 @@ public:
     string s = start;
 
     while (!distancesQueue.empty()) {
-      entryBfs<TV,TE> *top = distancesQueue.top();
+      entryBfs<TV, TE> *top = distancesQueue.top();
       dataResult.push_back(top->vertex->data);
       distancesQueue.pop();
       if (top->vertex == endV) {
         return dataResult;
       }
       for (Edge<TV, TE> *edge : top->vertex->edges) {
-        auto it = visited.find(edge->vertexes[1]);
+        Vertex<TV, TE> *edgeW = graph->findDifferent(edge, top->vertex);
+        auto it = visited.find(edgeW);
         if (it == visited.end()) {
-          visited[edge->vertexes[1]] = true;
-          entryBfs<TV,TE>* target = new entryBfs<TV,TE>(edge->vertexes[1]);
+          visited[edgeW] = true;
+          entryBfs<TV, TE> *target =
+              new entryBfs<TV, TE>(edgeW);
           target->cost = edge->weight;
           distancesQueue.push(target);
         }
