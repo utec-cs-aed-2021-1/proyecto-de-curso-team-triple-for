@@ -31,10 +31,10 @@ struct Airport {
       cout << "Latitude: " <<latitude << endl;
       cout << "Timezone: " <<timezone << endl;
       cout << "DST: " <<DST << endl;
-      cout << "Destinations: " << endl;
-
-      for (auto const& dest: destinations){
-          cout << " " << dest << endl;
-      }
+      // cout << "Destinations: " << endl;
+      //
+      // for (auto const& dest: destinations){
+      //     cout << " " << dest << endl;
+      // }
   }
 };

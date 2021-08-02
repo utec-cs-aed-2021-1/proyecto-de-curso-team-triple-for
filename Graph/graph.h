@@ -23,6 +23,12 @@ template <typename TV, typename TE> struct Edge {
 template <typename TV, typename TE> struct Vertex {
   TV data;
   std::list<Edge<TV, TE> *> edges;
+  // inline bool operator==(const Vertex& rhs) {
+  //     return this->data == rhs.data;
+  // }
+  // inline bool operator<(const Vertex& rhs){
+  //     return this->data < rhs.data;
+  // }
 };
 
 template <typename TV, typename TE> class Graph {

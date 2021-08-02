@@ -42,7 +42,9 @@ add_executable(
   Parser/parser.cpp
   Dset/ds.h
   Dset/dsarray.h
-  main.cpp Graph/Algorithms/FloydWarshall.h)
+  main.cpp 
+  Graph/Algorithms/FloydWarshall.h
+  Graph/Algorithms/GreedyBfs.h)
 
 target_link_libraries(proyecto_de_curso_team_triple_for
                       PRIVATE nlohmann_json::nlohmann_json stdc++fs)

@@ -6,12 +6,13 @@
 
 //#include "Tester/tester.h"
 //#include "Parser/parser.h"
+#include "Algorithms/FloydWarshall.h"
+#include "Algorithms/GreedyBfs.h"
 #include "Algorithms/bfs.h"
 #include "Algorithms/dfs.h"
 #include "Algorithms/dijkstra.h"
 #include "Algorithms/kruskal.h"
 #include "Algorithms/prim.h"
-#include "Algorithms/FloydWarshall.h"
 #include "Graph/DirectedGraph.h"
 #include "Graph/UndirectedGraph.h"
 #include "Parser/parser.h"
@@ -441,13 +442,13 @@ void test() {
   // Tester::executeParser();
   // DirectedGraph<char, int> g;
 
-    //floy - warshall 06 slide 20
+  // floy - warshall 06 slide 20
   DirectedGraph<char, int> dg;
-    dg.insertVertex("1", '1');
-    dg.insertVertex("2", '2');
-    dg.insertVertex("3", '3');
-    dg.insertVertex("4", '4');
-    dg.insertVertex("5", '5');
+  dg.insertVertex("1", '1');
+  dg.insertVertex("2", '2');
+  dg.insertVertex("3", '3');
+  dg.insertVertex("4", '4');
+  dg.insertVertex("5", '5');
 
   dg.createEdge("1", "3", 6);
   dg.createEdge("1", "4", 3);
@@ -458,18 +459,36 @@ void test() {
   dg.createEdge("5", "2", 4);
   dg.createEdge("5", "4", 2);
 
+  GreedyBfs<char, int> greedyBfs = GreedyBfs(&dg);
+  auto x = greedyBfs.apply("1", "4");
+  for (auto m : x) {
+    cout << m << endl;
+  }
 
-  FloydWarshall<char, int> floydWarhsall = FloydWarshall(&dg);
-
-  pair<vector<vector<int>>, vector<vector<string>>> result = floydWarhsall.apply();
-  floydWarhsall.display();
+  // FloydWarshall<char, int> floydWarhsall = FloydWarshall(&dg);
+  //
+  // pair<vector<vector<int>>, vector<vector<string>>> result =
+  //     floydWarhsall.apply();
+  // floydWarhsall.display();
 }
 
 int main(int argc, char *argv[]) {
+  // do not modify this
   filesystem::current_path("../Parser/Data");
+  //
   // menu();
-   test();
-  /*auto jsonResult = getJsonFromFile("airports.json");
+  // test();
+  auto jsonResult = getJsonFromFile("airports.json");
+  auto graph = getGraph(jsonResult);
+  GreedyBfs<string, double> greedyBfs = GreedyBfs(&graph);
+  auto x = greedyBfs.apply("7252", "5502");
+  for (auto m : x) {
+      auto x = getairportfromid(m,jsonResult);
+      x.display();
+      cout << endl;
+  }
+  /*
+  auto jsonResult = getJsonFromFile("airports.json");
   // auto heuristic = getHeuristic("2792",jsonResult);
   auto graph = getGraph(jsonResult);
   cout << graph.count_edge << endl;
