@@ -61,6 +61,13 @@ public:
       }
     }
   };
+  Edge<TV, TE> *findEdge(Vertex<TV, TE> *start, Vertex<TV, TE> *end) {
+    for (auto it = start->edges.begin(); it != start->edges.end(); ++it) {
+      if ((*it)->vertexes[1] == end) {
+        return *it;
+      }
+    }
+  };
 };
 
 #endif
