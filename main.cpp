@@ -25,6 +25,7 @@ using namespace std;
 void directed();
 void undirected();
 void templates();
+void test();
 void menu() {
   int op;
   do {
@@ -34,7 +35,8 @@ void menu() {
     cout << "\t1 Directed graph" << std::endl;
     cout << "\t2 Undirected graph" << std::endl;
     cout << "\t3 Test templates" << std::endl;
-    cout << "\t4 Exit" << std::endl;
+    cout << "\t4 Correr codigo desde test()" << std::endl;
+    cout << "\t5 Exit" << std::endl;
     cout << "Please select an option: ";
     cin >> op;
     switch (op) {
@@ -48,12 +50,15 @@ void menu() {
       templates();
       break;
     case 4:
+      test();
+      break;
+    case 5:
       cout << "Exited the program" << endl;
       return;
     default:
       cout << "Entered an incorrect option" << endl;
     }
-  } while (op == 1 || op == 2);
+  } while (op != 5);
 }
 
 void directed() {
@@ -733,60 +738,12 @@ void test() {
       cout << key.first << ": " << key.second << std::endl;
   }
 
-  // FloydWarshall<char, int> floydWarhsall = FloydWarshall(&dg);
-  //
-  // pair<vector<vector<int>>, vector<vector<string>>> result =
-  //     floydWarhsall.apply();
-  // floydWarhsall.display();
 }
 
 int main(int argc, char *argv[]) {
   // do not modify this
   filesystem::current_path("../Parser/Data");
-  //
-   menu();
-   //test();
-  // auto jsonResult = getJsonFromFile("airports.json");
-  // auto graph = getGraph(jsonResult);
-  // GreedyBfs<string, double> greedyBfs = GreedyBfs(&graph);
-  // auto x = greedyBfs.apply("7252", "5502");
-  // for (auto m : x) {
-  //     auto x = getairportfromid(m,jsonResult);
-  //     x.display();
-  //     cout << endl;
-  // }
-  //
-  auto jsonResult = getJsonFromFile("airports.json");
-  auto graph = getGraph(jsonResult);
-  string origin = "341";
-  string destiny = "3199";
-  auto heuristic = getHeuristic(destiny, jsonResult);
-  AStar<string, double> astar = AStar(&graph, heuristic);
-  auto x = astar.apply(origin, destiny);
-  for (auto m : x) {
-      auto x = getairportfromid(m, jsonResult);
-      x.display();
-      cout << endl;
-  }
-  //
-  // cout << endl << endl;
-  /*GreedyBfs<string, double> greedyBfs = GreedyBfs(&graph);
-  auto z = greedyBfs.apply(origin, destiny);
+  menu();
 
-  for (auto m : z) {
-      auto x = getairportfromid(m,jsonResult);
-      x.display();
-      cout << endl;
-  }*/
-
-  /*
-  auto jsonResult = getJsonFromFile("airports.json");
-  // auto heuristic = getHeuristic("2792",jsonResult);
-  auto graph = getGraph(jsonResult);
-  cout << graph.count_edge << endl;
-  cout << graph.count_vertex << endl;
-  // graph.display();
-  // auto x = getairportfromid("2802",jsonResult);
-  // x.display();*/
   return EXIT_SUCCESS;
 }
