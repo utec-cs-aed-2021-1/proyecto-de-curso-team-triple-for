@@ -18,6 +18,10 @@ Implemented using QT framework and methods implemented in current repository
 
 <https://github.com/morphisjustfun/AED-A-GUI>
 
+Airport route view
+
+<https://github.com/morphisjustfun/AED-VIEW-AIRPORT>
+
 ## JSON Paser
 
 Nlohmann json library was used. 
