@@ -177,3 +177,89 @@ Abstract interface to determine the members and functions of specific implementa
     * Input: none
     * Output: list of vertexes traversed using Bfs method
 
+## Dijkstra
+
+* graph
+* start_id
+
+#### Methods
+
+* Dijkstra
+    * Input: graph and start id
+    * Output: none
+
+* any_false
+    * Input: map of <vertexes: visited>
+    * Output: true if any vertex has not been visited, false otherwise
+
+* apply
+    * Input: none
+    * Output: Vector of <vertex, distance, parent> tuples
+
+
+## FloydWarshall
+
+* graph
+* distance matrix
+* parent matrix
+* vertex map
+* Ids map
+
+#### Methods
+
+* FloydWarshall
+    * Input: Directed graph
+    * Output: none
+
+* apply
+    * Input: none
+    * Output: Pair of matrix of distances and matrix of parents
+
+* display
+    * Input: none
+    * Output: none
+
+
+## Prim
+
+* graph
+* start id
+
+#### Methods
+
+* Prim
+    * Input: graph and start id
+    * Output: none
+
+* apply
+    * Input: none
+    * Output: MST as a undirected graph
+
+## Kruskal
+
+* graph
+
+#### Methods
+
+* Kruskal
+    * Input: undirected graph
+    * Output: none
+
+* apply
+    * Input: none
+    * Output: MST as a undirected graph
+
+## BellmanFord
+
+* graph
+* start id
+* 
+#### Methods
+
+* BellmanFord
+    * Input: directed graph and start id
+    * Output: none
+
+* apply
+    * Input: none
+    * Output: pair of unordered maps for vertex id:distance and vertex id: parent
