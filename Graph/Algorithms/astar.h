@@ -36,13 +36,6 @@ template <typename TV, typename TE> class AStar {
   vector<entryList<TV, TE> *> openList;
   vector<entryList<TV, TE> *> closedList;
 
-  vector<TV> convertEntryToStringVector(vector<entryList<TV, TE> *> target) {
-    vector<TV> result;
-    for (entryList<TV, TE> *m : target) {
-      result.push_back(m->vertex->data);
-    }
-    return result;
-  }
   bool entryExistsInVector(entryList<TV, TE> *target,
                            vector<entryList<TV, TE> *> object) {
     for (entryList<TV, TE> *each : object) {
