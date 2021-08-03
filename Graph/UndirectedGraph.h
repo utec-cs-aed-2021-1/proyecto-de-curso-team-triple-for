@@ -28,7 +28,8 @@ public:
       bool repeated = true;
       int count = 0;
 
-      for (auto &edge : this->vertexes[id1]->edges) {
+      /*
+       for (auto &edge : this->vertexes[id1]->edges) {
         if (edge->vertexes[0]->data == this->vertexes[id2]->data) {
           edge->weight = w;
           count++;
@@ -45,9 +46,9 @@ public:
               break;
           }
         }
-      }
+      }*/
 
-      if (repeated) {
+      //if (repeated) {
         auto *new_edge = new Edge<TV, TE>;
         new_edge->weight = w;
         new_edge->vertexes[0] = this->vertexes[id1];
@@ -55,7 +56,7 @@ public:
         this->vertexes[id1]->edges.push_front(new_edge);
         this->vertexes[id2]->edges.push_front(new_edge);
         this->count_edge++;
-      }
+      //}
 
       return true;
     } else {
