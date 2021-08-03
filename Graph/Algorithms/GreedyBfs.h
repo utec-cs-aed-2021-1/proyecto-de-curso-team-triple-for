@@ -1,5 +1,4 @@
 #pragma once
-
 #include "graph.h"
 #include <algorithm>
 #include <iostream>
@@ -14,7 +13,9 @@ using namespace std;
 template <typename TV, typename TE> struct entryBfs {
   TE cost;
   Vertex<TV, TE> *vertex;
-  entryBfs(Vertex<TV, TE> *vertex_) : vertex(vertex_), cost(0) {}
+  Vertex<TV, TE> *parent;
+  entryBfs(Vertex<TV, TE> *vertex_)
+      : vertex(vertex_), cost(0), parent(nullptr) {}
 };
 
 template <typename TV, typename TE> class CompareVertex {
@@ -31,6 +32,16 @@ template <typename TV, typename TE> class GreedyBfs {
       distancesQueue;
   Graph<TV, TE> *graph;
 
+  entryBfs<TV, TE> *findEntryFromVertex(Vertex<TV, TE> *vertex,
+                                        vector<entryBfs<TV, TE> *> target) {
+    for (entryBfs<TV, TE> *each : target) {
+      if (each->vertex == vertex) {
+        return each;
+      }
+    }
+    return nullptr;
+  }
+
 public:
   GreedyBfs(Graph<TV, TE> *graph) : graph(graph) {}
 
@@ -39,7 +50,7 @@ public:
         graph->vertexes.find(end) == graph->vertexes.end()) {
       return {};
     }
-    vector<TV> dataResult;
+    vector<entryBfs<TV, TE>*> dataResult;
 
     Vertex<TV, TE> *startV = graph->vertexes[start];
     Vertex<TV, TE> *endV = graph->vertexes[end];
@@ -50,19 +61,26 @@ public:
 
     while (!distancesQueue.empty()) {
       entryBfs<TV, TE> *top = distancesQueue.top();
-      dataResult.push_back(top->vertex->data);
+      dataResult.push_back(top);
       distancesQueue.pop();
       if (top->vertex == endV) {
-        return dataResult;
+        entryBfs<TV, TE> *tempEntry = top;
+        vector<TV> result;
+        while (tempEntry != nullptr) {
+          result.push_back(tempEntry->vertex->data);
+          tempEntry = findEntryFromVertex(tempEntry->parent, dataResult);
+        }
+        reverse(result.begin(),result.end());
+        return result;
       }
       for (Edge<TV, TE> *edge : top->vertex->edges) {
         Vertex<TV, TE> *edgeW = graph->findDifferent(edge, top->vertex);
         auto it = visited.find(edgeW);
         if (it == visited.end()) {
           visited[edgeW] = true;
-          entryBfs<TV, TE> *target =
-              new entryBfs<TV, TE>(edgeW);
+          entryBfs<TV, TE> *target = new entryBfs<TV, TE>(edgeW);
           target->cost = edge->weight;
+          target->parent = top->vertex;
           distancesQueue.push(target);
         }
       }

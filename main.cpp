@@ -493,25 +493,24 @@ int main(int argc, char *argv[]) {
   auto graph = getGraph(jsonResult);
   string origin = "341";
   string destiny = "3199";
-  auto heuristic = getHeuristic(destiny, jsonResult);
-  AStar<string, double> astar = AStar(&graph, heuristic);
-  auto x = astar.apply(origin, destiny);
-  cout << x.size();
-
+  // auto heuristic = getHeuristic(destiny, jsonResult);
+  // AStar<string, double> astar = AStar(&graph, heuristic);
+  // auto x = astar.apply(origin, destiny);
   // for (auto m : x) {
-  //     auto x = getairportfromid(m,jsonResult);
-  //     x.display();
-  //     cout << endl;
+  //   auto x = getairportfromid(m, jsonResult);
+  //   x.display();
+  //   cout << endl;
   // }
-  cout << endl << endl;
+  //
+  // cout << endl << endl;
   GreedyBfs<string, double> greedyBfs = GreedyBfs(&graph);
   auto z = greedyBfs.apply(origin, destiny);
-  cout << z.size();
-  // for (auto m : x) {
-  //     auto x = getairportfromid(m,jsonResult);
-  //     x.display();
-  //     cout << endl;
-  // }
+
+  for (auto m : z) {
+      auto x = getairportfromid(m,jsonResult);
+      x.display();
+      cout << endl;
+  }
 
   /*
   auto jsonResult = getJsonFromFile("airports.json");

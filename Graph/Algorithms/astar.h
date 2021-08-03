@@ -58,6 +58,16 @@ template <typename TV, typename TE> class AStar {
     return (lhs->g + lhs->h) < (rhs->g + rhs->h);
   }
 
+  entryList<TV, TE> *findEntryFromVertex(Vertex<TV, TE> *vertex,
+                                         vector<entryList<TV, TE> *> target) {
+    for (entryList<TV, TE> *each : target) {
+      if (each->vertex == vertex) {
+        return each;
+      }
+    }
+    return nullptr;
+  }
+
 public:
   AStar(Graph<TV, TE> *g, unordered_map<TV, TE> h) : graph(g), heuristic(h) {}
 
@@ -79,8 +89,14 @@ public:
       auto it = min_element(openList.begin(), openList.end(), cmpEntryList);
       entryList<TV, TE> *currentEntry = *it;
       if (currentEntry->vertex == endV) {
-        closedList.push_back(currentEntry);
-        auto result = convertEntryToStringVector(closedList);
+        entryList<TV, TE> *tempEntry = currentEntry;
+
+        vector<TV> result;
+        while (tempEntry != nullptr) {
+          result.push_back(tempEntry->vertex->data);
+          tempEntry = findEntryFromVertex(tempEntry->parent, closedList);
+        }
+        reverse(result.begin(), result.end());
         return result;
       }
       openList.erase(it);
@@ -111,6 +127,7 @@ public:
         if (!exO && !exC) {
           openList.push_back(succesorEntry);
           succesorEntry->g = successor_current_cost;
+          succesorEntry->parent = currentEntry->vertex;
           succesorEntry->h = heuristic[succesorEntry->vertex->data];
         }
       }

@@ -40,3 +40,10 @@ El proyecto del curso consiste en implementar una estructura de datos de grafo y
 * vector<TV> apply(string start, string end)
     * finds minimum path from start to end and returns the vector of node's ids
 
+
+### A*
+
+#### EntryList
+
+* Vertex<TV, TE> *vertex;
+* Vertex<TV, TE> *parent;
