@@ -17,6 +17,7 @@
 #include "Graph/DirectedGraph.h"
 #include "Graph/UndirectedGraph.h"
 #include "Parser/parser.h"
+#include "Algorithms/bellmanFord.h"
 #include "iomanip"
 
 using namespace std;
@@ -437,33 +438,34 @@ void test() {
   std::cout << "MENU UNDIRECT GRAPH TESTER" << std::endl;
   std::cout << "================================================" << std::endl;
 
-  // Here you can run your own code with exit option in the menu
-
-  // Tester::executeExamples();
-  // Tester::executeParser();
-  // DirectedGraph<char, int> g;
-
-  // floy - warshall 06 slide 20
   DirectedGraph<char, int> dg;
-  dg.insertVertex("1", '1');
-  dg.insertVertex("2", '2');
-  dg.insertVertex("3", '3');
-  dg.insertVertex("4", '4');
-  dg.insertVertex("5", '5');
 
-  dg.createEdge("1", "3", 6);
-  dg.createEdge("1", "4", 3);
-  dg.createEdge("2", "1", 3);
-  dg.createEdge("3", "4", 2);
-  dg.createEdge("4", "3", 1);
-  dg.createEdge("4", "2", 1);
-  dg.createEdge("5", "2", 4);
-  dg.createEdge("5", "4", 2);
+  dg.insertVertex("S", 'S');
+  dg.insertVertex("A", 'A');
+  dg.insertVertex("B", 'B');
+  dg.insertVertex("C", 'C');
+  dg.insertVertex("D", 'D');
+  dg.insertVertex("E", 'E');
 
-  GreedyBfs<char, int> greedyBfs = GreedyBfs(&dg);
-  auto x = greedyBfs.apply("1", "4");
-  for (auto m : x) {
-    cout << m << endl;
+  dg.createEdge("S", "E", 8);
+  dg.createEdge("S", "A", 10);
+  dg.createEdge("B", "A", 1);
+  dg.createEdge("A", "C", 2);
+  dg.createEdge("C", "B", -2);
+  dg.createEdge("D", "C", -1);
+  dg.createEdge("D", "A", -4);
+  dg.createEdge("E", "D", 1);
+
+  bellmanFord<char, int> bellmanford = bellmanFord(&dg, "S");
+
+  pair<unordered_map<string, int>, unordered_map<string, string>> result = bellmanford.apply();
+  cout << "Distancias: \n";
+  for (auto& key: result.first) {
+      cout << key.first << ": " << key.second << std::endl;
+  }
+  cout << "Padres: \n";
+  for (auto& key: result.second) {
+      cout << key.first << ": " << key.second << std::endl;
   }
 
   // FloydWarshall<char, int> floydWarhsall = FloydWarshall(&dg);
@@ -478,7 +480,7 @@ int main(int argc, char *argv[]) {
   filesystem::current_path("../Parser/Data");
   //
   // menu();
-  // test();
+   test();
   // auto jsonResult = getJsonFromFile("airports.json");
   // auto graph = getGraph(jsonResult);
   // GreedyBfs<string, double> greedyBfs = GreedyBfs(&graph);
@@ -503,14 +505,14 @@ int main(int argc, char *argv[]) {
   // }
   //
   // cout << endl << endl;
-  GreedyBfs<string, double> greedyBfs = GreedyBfs(&graph);
+  /*GreedyBfs<string, double> greedyBfs = GreedyBfs(&graph);
   auto z = greedyBfs.apply(origin, destiny);
 
   for (auto m : z) {
       auto x = getairportfromid(m,jsonResult);
       x.display();
       cout << endl;
-  }
+  }*/
 
   /*
   auto jsonResult = getJsonFromFile("airports.json");

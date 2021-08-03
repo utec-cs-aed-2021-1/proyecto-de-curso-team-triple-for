@@ -30,6 +30,7 @@ add_executable(
   Graph/Algorithms/dfs.h
   Graph/Algorithms/dijkstra.h
   Graph/Algorithms/kruskal.h
+  Graph/Algorithms/bellmanFord.h
   Graph/Algorithms/prim.h
   Graph/DirectedGraph.h
   Graph/graph.h
