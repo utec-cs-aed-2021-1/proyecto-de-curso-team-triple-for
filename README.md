@@ -11,6 +11,13 @@
 
 El proyecto del curso consiste en implementar una estructura de datos de grafo y un file parser. La estructura debe soportar los métodos y algoritmos descritos a continuacion:  
 
+
+## GUI
+
+Implemented using QT framework and methods implemented in current repository
+
+<https://github.com/morphisjustfun/AED-A-GUI>
+
 ## JSON Paser
 
 Nlohmann json library was used. 
