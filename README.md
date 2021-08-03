@@ -177,7 +177,7 @@ Abstract interface to determine the members and functions of specific implementa
 
 #### Methods
 
-* Dfs
+* Bfs
     * Input: connected graph and start id
     * Output: none
 * apply
