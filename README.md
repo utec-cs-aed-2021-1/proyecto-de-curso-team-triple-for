@@ -3,109 +3,274 @@
 --------
 
 ## Integrantes
-- 
-- 
-- 
+- Jorge Collazos
+- Luis Berrospi
+- Mario Ríos
 
 ----
 
 El proyecto del curso consiste en implementar una estructura de datos de grafo y un file parser. La estructura debe soportar los métodos y algoritmos descritos a continuacion:  
 
 
-## Graph data structure
+## GUI
 
-* El grafo debe ser dinámico (inserciones. eliminaciones, búsquedas, ...)
-* Se debe implementar los dos tipos de grafos: dirigidos y no-dirigidos.
-* No considerar loops ni multi-arista. 
+Implemented using QT framework and methods implemented in current repository
+
+<https://github.com/morphisjustfun/AED-A-GUI>
+
+Airport route view
+
+<https://github.com/morphisjustfun/AED-VIEW-AIRPORT>
+
+## JSON Paser
+
+Nlohmann json library was used. 
+Harversine formula was used to get the distance from two points given its latitude and longitude.
+
+#### Airport
+
+Struct to map data from JSON
+
+#### Methods
+
+* getJsonFromFile
+    * Input: filename string
+    * Output: JSON array object from given file
+* getHeuristic
+    * Input: airportId, target json
+    * Output: unordered_map containing heuristic from the given airportId
+* getGraph
+    * Input: json target
+    * Output: undirected graph containing airports
+* getairportfromid
+    * Input: airportid and json target
+    * Output: Airport struct
+* distance
+    * Input: two points on the earth
+    * Output: distance in km using Harversine formula
+
+## Graph
+
+Abstract interface to determine the members and functions of specific implementations (undirected and directed)
+
+### Members
+
+* Vertex
+    * data
+    * edges
+     
+* Edge
+    * weight
+    * vertexes
+
+#### Methods
+
+* vertexes
+    * unordered_map containing the relation between alias string and the vertex
+* insertVertex
+* createEdge
+* deleteVertex
+* deleteEdge
+* density
+* isDense
+* isConnected
+* isStronglyConnected
+* empty
+* clear
+* displayVertex
+* findById
+* display
+* findDifferent
+    * find adjacent node from a node and an edge
+* findEdge
+* findVertex
+
+## Greedy BFS
+
+#### EntryBFS
+
+* cost
+* vertex
+    * vertex holding entry 
+* parent;
+    * parent holding
+
+#### Comparator
+
+* operator
+    * compare two EntryBFS by its cost property
+
+#### Members
+
+* visited
+* distancesQueue
+    * priority queue containing distances and using custom comparator
+* graph
+
+#### Methods
+
+* findEntryFromVertex
+    * Input: vertex, vector of entryBFS
+    * Output: entryBFS that contains input vertex
+* GreedyBfs
+    * Input: graph
+    * Output: none
+* apply
+    * Input: start and end strings
+    * Output: finds minimum path from start to end and returns the vector of node's ids using parents and distances queue
 
 
-### Methods:
-```cpp
-bool insertVertex(string id, V data); // Creates a new vertex in the graph with some data and an ID
+## A*
 
-bool createEdge(string start, string end, E data); // Creates a new edge in the graph with some data
+#### EntryList
 
-bool deleteVertex(string id); // Deletes a vertex in the graph
+* vertex
+    * vertex holding entry 
+* parent;
+    * parent holding
+* g
+    * distance cost
+* h
+    * heuristic cost
 
-bool deleteEdge(string start, string end); // Deletes an edge in the graph, it is not possible to search by the edge value, since it can be repeated
+#### Comparator
 
-E &operator()(string start, string end); // Gets the value of the edge from the start and end vertexes
+* cmpEntryList
+    * compares two entryList by its g (distance) and h (heuristic) properties
 
-float density() const; // Calculates the density of the graph
-
-bool isDense(float threshold = 0.5) const; // Calculates the density of the graph, and determine if it is dense dependening on a threshold value
-
-bool isConnected(); // Detect if the graph is connected
-
-bool isStronglyConnected() throw(); // Detect if the graph is strongly connected (only for directed graphs)
-
-bool empty(); // If the graph is empty
-
-void clear(); // Clears the graph
-```
-
-### Algorithms:
-```cpp
-//Given the graph
-UndirectedGraph<char, int> graph;
-
-//1- Generates a MST graph using the Kruskal approach (only for undirected graphs)
-Kruskal<char, int> kruskal(&graph);
-UndirectedGraph<char, int> result = kruskal.apply();//return a tree
-
-//2- Generates a MST graph using the Prim approach (only for undirected graphs)
-Prim<char, int> prim(&graph, "A");
-UndirectedGraph<char, int> result = prim.apply();//return a tree
-
-//3- A *
-AStar<char, int> astar(&graph, "A", "Z", vector<int> heuristics);
-UndirectedGraph<char, int> result = astar.apply();
-
-```
-
-
-## JSON file parser
-* Construye un grafo a partir de una archivo JSON de aereopuertos del mundo. 
-
-
-### Methods:
-```cpp
-void clear(); // Clears parser saved atributes
-
-void readJSON(); // Parses JSON file and saves data into class
-// NOTE: each derived class has its own readJSON method
-
-void uGraphMake(UndirectedGraph<string, double> &tempGraph); // Adds the parsed data into the specified undirected graph
-
-void dGraphMake(DirectedGraph<string, double> &tempGraph); // Adds the parsed data into the specified directed graph
-```
-
-## [Git Karma Guidelines](http://karma-runner.github.io/5.2/dev/git-commit-msg.html)
-
-```
-<type>(<scope>): <subject>
-
-<body>
-```
-
-### Allowed ```<type>``` values
-
-* feat (new feature for the user, not a new feature for build script)
-* fix (bug fix for the user, not a fix to a build script)
-* docs (changes to the documentation)
-* style (formatting, missing semi colons, etc)
-* refactor (refactoring production code, eg. renaming a variable)
-* test (adding missing tests, refactoring tests)
-* chore (updating grunt tasks etc)
-
-### Allowed ```<scope>``` values
+#### Members
 
 * graph
-* directedGraph
-* undirectedGraph
-* parser
-* main
-* tester
+* heuristic
+* openList
+* closedList
+
+#### Methods
+
+* findEntryFromVertex
+    * Input: vertex, vector of entryList
+    * Output: entryList that contains input vertex
+* AStar
+    * Input: graph, heuristic
+    * Output: none
+* apply
+    * Input: start string, end string and heuristic unordered_map
+    * Output: finds minimum path from start to end 
+
+## DFS
 
 
-> **PD:** Puntos extras sobre Evaluación Continua si se implementa una GUI.
+#### Members
+
+* graph
+* start_id
+
+#### Methods
+
+* Dfs
+    * Input: graph and start id
+    * Output: none
+* apply
+    * Input: none
+    * Output: list of vertexes traversed using Dfs method
+
+## BFS
+
+* graph
+* start_id
+
+#### Methods
+
+* Bfs
+    * Input: connected graph and start id
+    * Output: none
+* apply
+    * Input: none
+    * Output: list of vertexes traversed using Bfs method
+
+## Dijkstra
+
+* graph
+* start_id
+
+#### Methods
+
+* Dijkstra
+    * Input: graph and start id
+    * Output: none
+
+* any_false
+    * Input: map of <vertexes: visited>
+    * Output: true if any vertex has not been visited, false otherwise
+
+* apply
+    * Input: none
+    * Output: Vector of <vertex, distance, parent> tuples
+
+
+## FloydWarshall
+
+* graph
+* distance matrix
+* parent matrix
+* vertex map
+* Ids map
+
+#### Methods
+
+* FloydWarshall
+    * Input: Directed graph
+    * Output: none
+
+* apply
+    * Input: none
+    * Output: Pair of matrix of distances and matrix of parents
+
+* display
+    * Input: none
+    * Output: none
+
+
+## Prim
+
+* graph
+* start id
+
+#### Methods
+
+* Prim
+    * Input: graph and start id
+    * Output: none
+
+* apply
+    * Input: none
+    * Output: MST as a undirected graph
+
+## Kruskal
+
+* graph
+
+#### Methods
+
+* Kruskal
+    * Input: undirected graph
+    * Output: none
+
+* apply
+    * Input: none
+    * Output: MST as a undirected graph
+
+## BellmanFord
+
+* graph
+* start id
+* 
+#### Methods
+
+* BellmanFord
+    * Input: directed graph and start id
+    * Output: none
+
+* apply
+    * Input: none
+    * Output: pair of unordered maps for vertex id:distance and vertex id: parent
